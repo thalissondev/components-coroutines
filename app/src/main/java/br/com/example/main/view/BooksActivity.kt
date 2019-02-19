@@ -64,11 +64,12 @@ class BooksActivity : AppCompatActivity() {
     }
 
     private fun openActivity() {
-        val intent = Intent(
-            this,
-            Class.forName("br.com.example.register.RegisterActivity")
-        )
-        startActivity(intent)
+        try {
+            val intent = Intent(this, Class.forName("br.com.example.register.RegisterActivity"))
+            startActivity(intent)
+        } catch (exception: ClassNotFoundException) {
+            showError("This dynamic module not exists. Please download now.")
+        }
     }
 
     private fun bindObservers() {
@@ -89,12 +90,14 @@ class BooksActivity : AppCompatActivity() {
         }
 
         val errorDynamic = Observer<Exception> {
-            Toast.makeText(this, "Exception: $it", Toast.LENGTH_LONG).show()
+            showError("Exception: $it")
         }
 
         dynamicViewModel.onSuccess.observe(this, successDynamic)
         dynamicViewModel.onError.observe(this, errorDynamic)
-
     }
 
+    private fun showError(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
 }
