@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="this_is_a_dynamic_module">This is a dynamic module!</string>
+</resources>
