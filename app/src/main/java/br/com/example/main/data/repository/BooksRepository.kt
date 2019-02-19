@@ -24,5 +24,4 @@ class BooksRepository constructor(
             getBooksResult.postValue(books)
         })
     }
-
 }
